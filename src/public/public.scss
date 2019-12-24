@@ -1,0 +1,117 @@
+// $color: #e3f2ff;
+$color: #f8f8f8;
+$colorRed: #fc414a;
+
+//单行文本溢出
+.ellipsis-one {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+//两行文本溢出
+.ellipsis-two {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+//三行文本溢出
+.ellipsis-three {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.tc {
+  text-align: center;
+}
+
+.tr {
+  text-align: right;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+//按钮
+@mixin btn($w, $h, $color, $radius: true, $disabled: false) {
+  display: inline-block;
+  width: $w;
+  height: $h;
+  line-height: $h;
+  text-align: center;
+  color: #fff;
+  cursor: pointer;
+  background-color: $color;
+
+  &:active {
+    opacity: 0.8;
+  }
+
+  @if $radius {
+    //是否需要边框 默认需要
+    border-radius: if($radius==true, $h/2, $radius);
+  }
+  @if $disabled {
+    //是否禁用状态
+    cursor: not-allowed;
+    background-color: #dddddd;
+  }
+}
+
+// 生成三角形
+@mixin triangle($direction, $size, $borderColor) {
+  content: "";
+  height: 0;
+  width: 0;
+
+  @if $direction==top {
+    border-bottom: $size solid $borderColor;
+    border-left: $size dashed transparent;
+    border-right: $size dashed transparent;
+  } @else if $direction==right {
+    border-left: $size solid $borderColor;
+    border-top: $size dashed transparent;
+    border-bottom: $size dashed transparent;
+  } @else if $direction==bottom {
+    border-top: $size solid $borderColor;
+    border-left: $size dashed transparent;
+    border-right: $size dashed transparent;
+  } @else if $direction==left {
+    border-right: $size solid $borderColor;
+    border-top: $size dashed transparent;
+    border-bottom: $size dashed transparent;
+  }
+}
+
+//生成圆点
+@mixin DOT($width, $color: #ddd) {
+  width: $width;
+  height: $width;
+  border-radius: $width;
+  background-color: $color;
+}
+
+//计算百分比  percentage(56 / 750)
+@function math-percent($px, $base: 750) {
+  @return ($px / $base) * 100%;
+}
+
+//背景图片
+@mixin BG() {
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
