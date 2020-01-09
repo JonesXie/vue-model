@@ -25,4 +25,9 @@ export default {
 .cursor {
   color: $colorRed;
 }
+.name {
+  width: 500px;
+  height: 500px;
+  background: green;
+}
 </style>

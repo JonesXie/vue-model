@@ -7,12 +7,12 @@ const RouterMap = [
   //首页
   {
     path: '/',
-    component: () => import('@/pages/index/TheIndex.vue'),
+    component: () => import('@/views/index/TheIndex.vue'),
     alias: '/index',
   },
   {
     path: '/login',
-    component: () => import('@/pages/login/TheLogin.vue'),
+    component: () => import('@/views/login/TheLogin.vue'),
   },
   {
     path: '*',
