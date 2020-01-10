@@ -10,6 +10,7 @@ vue/cli 搭建的框架目录，减少项目初始化各项配置，包含如下
 - sass 预处理器，全局配置，sass 常用功能
 - 常用 js 方法封装
 - reset 样式处理
+- svg 图标，svg 雪碧图，svg 组件
 
 > 技术栈：Vue、Vue Cli、Vue Router、Vuex、Axios
 
