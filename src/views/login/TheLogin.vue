@@ -1,7 +1,5 @@
 <template>
-  <section class="TheLogin">
-    登录页
-  </section>
+  <section class="TheLogin">登录页</section>
 </template>
 
 <script>
