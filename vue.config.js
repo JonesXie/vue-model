@@ -4,7 +4,7 @@ function resolve(dir) {
   return path.join(__dirname, ".", dir);
 }
 module.exports = {
-  lintOnSave: false, //保存时使用eslint
+  lintOnSave: true, //保存时使用eslint
   productionSourceMap: false, //生产环境取消sourcemap
   devServer: {
     open: true, // 是否自动打开浏览器页面
