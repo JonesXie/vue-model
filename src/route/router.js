@@ -8,25 +8,25 @@ const RouterMap = [
   {
     path: "/",
     component: () => import("@/views/index/TheIndex.vue"),
-    alias: "/index"
+    alias: "/index",
   },
   {
     path: "/login",
-    component: () => import("@/views/login/TheLogin.vue")
+    component: () => import("@/views/login/TheLogin.vue"),
   },
   {
     path: "*",
     //pc
-    component: () => import("@/components/404/PC404.vue")
+    component: () => import("@/components/404/PC404.vue"),
     //mobile
     // component: () => import('@/components/404/Mobile404.vue'),
-  }
+  },
 ];
 
 export default new VueRouter({
   mode: "history",
   scrollBehavior: () => ({
-    y: 0
+    y: 0,
   }), //滚动到顶部
-  routes: RouterMap
+  routes: RouterMap,
 });

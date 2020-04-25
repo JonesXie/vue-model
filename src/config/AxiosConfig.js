@@ -9,37 +9,36 @@ import AxiosCache from "./AxiosCache";
 // 修改axios部分默认值
 let changeDefault = {
   baseURL: process.env.VUE_APP_Axios_URL, //请求地址, process.env.BASE_API默认地址
-  timeout: process.env.NODE_ENV === "development" ? 0 : 10000 // 请求时长;
+  timeout: process.env.NODE_ENV === "development" ? 0 : 10000, // 请求时长;
   // withCredentials: true, //表示跨域请求时是否需要使用凭证，默认为false
 };
 Object.assign(axios.defaults, changeDefault);
 
 new AxiosCache(axios, {
   // 请求拦截器
-  requestInterceptorFn: config => {
+  requestInterceptorFn: (config) => {
     // do somethings
     return Promise.resolve(config); // 需要用Promise将config返回
   },
   // 响应拦截器
-  responseInterceptorFn: response => {
+  responseInterceptorFn: (response) => {
     // 自定义响应拦截器，可统一返回的数据格式也可拦截错误
     const res = response.data;
     // 根据后台提供的状态进行管理
     if (res.result === 1) {
       // 请求成功处理
       return Promise.resolve(response);
-    } else if (res.result === 0) {
+    } else if (res.result === -1) {
       //没有权限/未登录
-      router.replace("/");
-      const CancelToken = axios.CancelToken;
-      store.state.source.cancel && store.state.source.cancel(); //中断请求
-      store.commit("SET_SOURCE", CancelToken.source());
+      // 设置login页登录返回地址 , 需在登录后通过此路径跳转
+      store.commit("SET_FULLPATH", router.currentRoute.fullPath);
+      router.push("/login").catch(() => {});
       return new Promise(() => {}); //中断操作链
     } else {
       //不符合预期的返回状态
       return Promise.reject(res);
     }
-  }
+  },
 });
 
 // 封装请求
@@ -50,7 +49,7 @@ export const post = (url, data, config = {}) => {
     method: "POST",
     url: url,
     data: defaultConfig.isJson ? data : qs.stringify(data), // 通过isJson来确定传参格式是json还是formData，默认是json
-    ...defaultConfig
+    ...defaultConfig,
   });
 };
 export const get = (url, data, config = {}) => {
@@ -60,7 +59,7 @@ export const get = (url, data, config = {}) => {
     method: "GET",
     url: url,
     params: data,
-    ...defaultConfig
+    ...defaultConfig,
   });
 };
 

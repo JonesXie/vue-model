@@ -9,7 +9,7 @@ module.exports = {
   devServer: {
     open: true, // 是否自动打开浏览器页面
     host: "0.0.0.0", // 指定使用一个 host 0.0.0.0，默认是 localhost
-    port: 8080 // 端口地址
+    port: 8080, // 端口地址
     // https: true //开启本地HTTPS
     // proxy: {
     //   '/api': { //代理api
@@ -21,11 +21,11 @@ module.exports = {
     //预处理sass
     loaderOptions: {
       scss: {
-        prependData: `@import "~@/utils/public.scss";`
-      }
-    }
+        prependData: `@import "~@/utils/public.scss";`,
+      },
+    },
   },
-  chainWebpack: config => {
+  chainWebpack: (config) => {
     const svgRule = config.module.rule("svg");
     svgRule.uses.clear(); // 重要:清除已有的所有svg loader。
     // 添加要替换的 loader
@@ -37,7 +37,7 @@ module.exports = {
       .use("svg-sprite-loader")
       .loader("svg-sprite-loader")
       .options({
-        symbolId: "icon-[name]"
+        symbolId: "icon-[name]",
       });
-  }
+  },
 };

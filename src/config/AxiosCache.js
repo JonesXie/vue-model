@@ -8,7 +8,7 @@ export default class Cache {
     this.config = config;
     this.defaultConfig = {
       cache: false,
-      expire: 100 * 1000 //到期时间
+      expire: 100 * 1000, //到期时间
     };
     this.CancelToken = this.axios.CancelToken;
     this.init();
@@ -24,7 +24,7 @@ export default class Cache {
 
   requestInterceptor(callback) {
     this.axios.interceptors.request.use(
-      async config => {
+      async (config) => {
         let newConfig = callback && (await callback(config));
         config = newConfig || config;
         let {
@@ -33,7 +33,7 @@ export default class Cache {
           params,
           cacheMode,
           cache = this.defaultConfig.cache,
-          expire = this.defaultConfig.expire
+          expire = this.defaultConfig.expire,
         } = config;
         if (cache === true) {
           let getKey = data
@@ -59,7 +59,7 @@ export default class Cache {
         }
         return config;
       },
-      error => {
+      (error) => {
         return Promise.reject(error);
       }
     );
@@ -67,7 +67,7 @@ export default class Cache {
 
   responseInterceptor(callback) {
     this.axios.interceptors.response.use(
-      async response => {
+      async (response) => {
         let newResponse = callback && (await callback(response));
         response = newResponse || response;
         if (response.status !== 200) {
@@ -79,7 +79,7 @@ export default class Cache {
             expire: this.getExpireTime(),
             params,
             data,
-            result: response.data
+            result: response.data,
           };
           let setKey = data ? `${url}?cacheParams=${data}` : `${url}?cacheParams=${params}`;
           this.caches.push(setKey);
@@ -87,7 +87,7 @@ export default class Cache {
         }
         return response.data;
       },
-      error => {
+      (error) => {
         // 返回缓存数据
         if (this.axios.isCancel(error)) {
           return Promise.resolve(error.message.result);

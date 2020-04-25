@@ -10,12 +10,12 @@ const service = axios.create({
   baseURL: process.env.VUE_APP_Axios_URL, //请求地址
   // baseURL: process.env.BASE_API, //默认请求地址
   // withCredentials: true, //表示跨域请求时是否需要使用凭证，默认为false
-  timeout: process.env.NODE_ENV === "development" ? 0 : 10000 // 请求时长
+  timeout: process.env.NODE_ENV === "development" ? 0 : 10000, // 请求时长
 });
 
 // 请求拦截
 service.interceptors.request.use(
-  config => {
+  (config) => {
     // do something
     return config;
   },
@@ -24,7 +24,7 @@ service.interceptors.request.use(
 
 // 响应拦截
 service.interceptors.response.use(
-  response => {
+  (response) => {
     const res = response.data;
     if (res.result == 1) {
       // return response;
@@ -41,7 +41,7 @@ service.interceptors.response.use(
       return Promise.reject(res);
     }
   },
-  error => {
+  (error) => {
     if (axios.isCancel(error)) {
       // 取消请求的情况下，终端Promise调用链
       return new Promise(() => {});
@@ -60,7 +60,7 @@ export const post = (url, data, config = {}) => {
     method: "POST",
     url: url,
     data: defaultConfig.isJson ? data : qs.stringify(data), // 通过isJson来确定传参格式是json还是formData，默认是json
-    ...defaultConfig
+    ...defaultConfig,
   });
 };
 export const get = (url, data, config = {}) => {
@@ -70,7 +70,7 @@ export const get = (url, data, config = {}) => {
     method: "GET",
     url: url,
     params: data,
-    ...defaultConfig
+    ...defaultConfig,
   });
 };
 

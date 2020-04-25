@@ -4,7 +4,7 @@ import Vue from "vue";
 Vue.use(Vuex);
 
 const sessionData = {
-  indexData: JSON.parse(sessionStorage.getItem("indexData"))
+  indexData: JSON.parse(sessionStorage.getItem("indexData")),
 };
 
 const state = {
@@ -12,14 +12,18 @@ const state = {
   source: {
     // 取消axios请求
     token: null,
-    cancel: null
-  }
+    cancel: null,
+  },
+  fullPath: "/",
 };
 
 const mutations = {
   SET_SOURCE(state, val) {
     state.source = val;
-  }
+  },
+  SET_FULLPATH(state, val) {
+    state.fullPath = val;
+  },
 };
 const actions = {
   // SET_INDEXDATA({ commit }, val) {
@@ -30,7 +34,7 @@ const actions = {
 export default new Vuex.Store({
   state,
   mutations,
-  actions
+  actions,
 });
 
 //使用模块化
