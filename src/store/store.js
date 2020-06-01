@@ -38,10 +38,10 @@ export default new Vuex.Store({
 });
 
 //使用模块化
-// import isBar from './modules/BarStatus'
+// import isBar from './modules/layout.js'
 // export default new Vuex.Store({
 //   modules: {
-//     isBar,
+//     layout,
 //   },
 //   state,
 //   mutations,

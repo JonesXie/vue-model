@@ -1,6 +1,6 @@
 <template>
   <section class="TheIndex">
-    <svg-icon icon-class="happy"></svg-icon>
+    <svg-icon name="happy"></svg-icon>
     <span class="cursor clear">首页</span>
     <router-link to="/login">登录</router-link>
   </section>

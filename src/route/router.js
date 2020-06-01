@@ -2,13 +2,22 @@ import vue from "vue";
 import VueRouter from "vue-router";
 
 vue.use(VueRouter);
-
+// 解决vue-router 在push/repalce中添加的Promise
+const originalPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function push(location, onResolve, onReject) {
+  if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject);
+  return originalPush.call(this, location).catch((err) => err);
+};
 const RouterMap = [
   //首页
   {
     path: "/",
+    redirect: "/index",
+    // alias: "/index",
+  },
+  {
+    path: "/index",
     component: () => import("@/views/index/TheIndex.vue"),
-    alias: "/index",
   },
   {
     path: "/login",

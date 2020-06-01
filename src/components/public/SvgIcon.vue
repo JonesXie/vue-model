@@ -8,7 +8,7 @@
 export default {
   name: "SvgIcon",
   props: {
-    iconClass: {
+    name: {
       type: String,
       required: true
     },
@@ -19,7 +19,7 @@ export default {
   },
   computed: {
     iconName() {
-      return `#icon-${this.iconClass}`;
+      return `#icon-${this.name}`;
     },
     svgClass() {
       if (this.className) {

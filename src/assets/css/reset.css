@@ -169,8 +169,7 @@ mark {
 a,
 ins,
 s,
-u,
-del {
+u {
   text-decoration: none;
 }
 
@@ -190,3 +189,16 @@ body {
   line-height: 1;
   -webkit-text-size-adjust: none;
 }
+a {
+  color: #333333;
+}
+
+/* ios */
+div {
+  -webkit-appearance: none;
+}
+img {
+  -webkit-touch-callout: none;
+}
+
+/* andriod */

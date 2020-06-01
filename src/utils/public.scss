@@ -1,6 +1,8 @@
 // $color: #e3f2ff;
 $color: #f8f8f8;
-$colorRed: #fc414a;
+$colorRed: #ff5353;
+$colorBG: #fafafa;
+$line: #cccccc;
 
 //单行文本溢出
 .ellipsis-one {
@@ -70,6 +72,15 @@ $colorRed: #fc414a;
 .an-up:hover {
   transform: translate3d(0, -10px, 0);
 }
+.isDisabled {
+  cursor: not-allowed;
+  background: #e4e4e4 !important;
+  color: #999 !important;
+}
+.scroll-y {
+  overflow-y: scroll;
+  -webkit-overflow-y-scrolling: touch;
+}
 
 //按钮
 @mixin btn($w, $h, $color, $radius: true, $disabled: false) {
@@ -137,7 +148,7 @@ $colorRed: #fc414a;
 
 //背景图片
 @mixin BG() {
-  background-size: 100%;
+  background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
 }
