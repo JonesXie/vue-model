@@ -141,14 +141,23 @@ $line: #cccccc;
   background-color: $color;
 }
 
-//计算百分比  percentage(56 / 750)
-@function math-percent($px, $base: 750) {
-  @return ($px / $base) * 100%;
-}
-
 //背景图片
 @mixin BG() {
   background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
 }
+
+// 扩大可点击区域
+@mixin expand-range($top: -10px, $right: $top, $bottom: $top, $left: $right, $position: relative) {
+  position: $position;
+  &:after {
+    content: "";
+    position: absolute;
+    top: $top;
+    right: $right;
+    bottom: $bottom;
+    left: $left;
+  }
+}
+//使用：.test { @include expand-range($top: -5px, $position: absolute) }

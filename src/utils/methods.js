@@ -194,7 +194,7 @@ export function addConsole() {
   let vConsole = document.createElement("script");
   vConsole.type = "text/javascript";
   vConsole.src = "https://cdn.bootcdn.net/ajax/libs/vConsole/3.3.4/vconsole.min.js";
-  process.env.NODE_ENV === "development" &&
+  (process.env.NODE_ENV === "development" || process.env.VUE_APP_VCONSOLE) &&
     document.body.appendChild(vConsole) &&
     (vConsole.onload = function() {
       // eslint-disable-next-line
