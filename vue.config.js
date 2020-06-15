@@ -1,5 +1,6 @@
 const path = require("path");
-
+const CompressionWebpackPlugin = require("compression-webpack-plugin"); // gzip压缩
+const productionGzipExtensions = ["js", "css"]; // 需要gzip压缩的文件，图片不要压缩，体积会比原来还大
 function resolve(dir) {
   return path.join(__dirname, ".", dir);
 }
@@ -10,6 +11,7 @@ module.exports = {
     open: true, // 是否自动打开浏览器页面
     host: "0.0.0.0", // 指定使用一个 host 0.0.0.0，默认是 localhost
     port: 8080, // 端口地址
+    disableHostCheck: true,
     // https: true //开启本地HTTPS
     // proxy: {
     //   '/api': { //代理api
@@ -26,6 +28,7 @@ module.exports = {
     },
   },
   chainWebpack: (config) => {
+    // 加载svg图
     const svgRule = config.module.rule("svg");
     svgRule.uses.clear(); // 重要:清除已有的所有svg loader。
     // 添加要替换的 loader
@@ -39,5 +42,21 @@ module.exports = {
       .options({
         symbolId: "icon-[name]",
       });
+  },
+  configureWebpack: () => {
+    // gzip压缩
+    if (process.env.NODE_ENV === "production") {
+      return {
+        plugins: [
+          new CompressionWebpackPlugin({
+            // filename: '[path].gz[query]',
+            algorithm: "gzip",
+            test: new RegExp("\\.(" + productionGzipExtensions.join("|") + ")$"),
+            threshold: 10240, //对超过10k的数据进行压缩
+            minRatio: 0.6, // 压缩比例，值为0 ~ 1
+          }),
+        ],
+      };
+    }
   },
 };
